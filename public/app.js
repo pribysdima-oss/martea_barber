@@ -58,18 +58,31 @@ function renderCalendar() {
   }
 }
 
+const pause = (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds));
+
 async function loadAvailability() {
   const message = document.querySelector('#availability-message');
   state.selectedTime = null;
   document.querySelector('#selected-time').value = '';
   message.textContent = t('availability.checking');
-  try {
-    const response = await fetch(api(`/api/availability?date=${encodeURIComponent(state.selectedDate)}`));
-    const data = await response.json();
-    if (!response.ok) throw new Error(data.error || t('availability.offline'));
-    state.booked = data.booked;
-    message.textContent = data.booked.length ? t('availability.booked') : t('availability.open');
-  } catch (_error) {
+  let lastError;
+  // The page may finish loading slightly before start.bat finishes starting
+  // Node.js. Retry briefly so the customer never has to refresh manually.
+  for (let attempt = 0; attempt < 5; attempt += 1) {
+    try {
+      const response = await fetch(api(`/api/availability?date=${encodeURIComponent(state.selectedDate)}`), { cache: 'no-store' });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error || t('availability.offline'));
+      state.booked = data.booked;
+      message.textContent = data.booked.length ? t('availability.booked') : t('availability.open');
+      renderSlots();
+      return;
+    } catch (error) {
+      lastError = error;
+      if (attempt < 4) await pause(700);
+    }
+  }
+  if (lastError) {
     state.booked = [];
     message.textContent = t('availability.offline');
   }
