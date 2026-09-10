@@ -64,6 +64,26 @@ function renderCalendar() {
 
 const pause = (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds));
 
+function postBooking(payload) {
+  return new Promise((resolve, reject) => {
+    const request = new XMLHttpRequest();
+    request.open('POST', bookingEndpoint, true);
+    request.responseType = 'json';
+    request.setRequestHeader('Content-Type', 'application/json');
+    request.timeout = 20000;
+    request.onload = () => {
+      let data = request.response;
+      if (!data && request.responseText) {
+        try { data = JSON.parse(request.responseText); } catch (_error) { data = {}; }
+      }
+      resolve({ ok: request.status >= 200 && request.status < 300, data: data || {} });
+    };
+    request.onerror = () => reject(new TypeError('Failed to fetch'));
+    request.ontimeout = () => reject(new TypeError('Failed to fetch'));
+    request.send(JSON.stringify(payload));
+  });
+}
+
 async function loadAvailability() {
   const message = document.querySelector('#availability-message');
   state.selectedTime = null;
@@ -138,9 +158,8 @@ document.querySelector('#booking-form').addEventListener('submit', async (event)
   if (!canonicalServices.includes(payload.service)) { status.textContent = t('form.pickSlot'); status.className = 'form-status error'; return; }
   submit.disabled = true; status.textContent = t('form.sending'); status.className = 'form-status';
   try {
-    const response = await fetch(bookingEndpoint, { method:'POST', headers:{ 'Content-Type':'application/json' }, body:JSON.stringify(payload) });
-    const data = await response.json();
-    if (!response.ok) throw new Error(data.error || t('form.offline'));
+    const response = await postBooking(payload);
+    if (!response.ok) throw new Error(response.data.error || t('form.offline'));
     status.textContent = t('form.success').replace('{date}', state.selectedDate).replace('{time}', state.selectedTime);
     event.currentTarget.reset(); state.booked.push(state.selectedTime); state.selectedTime = null; renderSlots();
   } catch (error) { status.textContent = friendlyError(error); status.className = 'form-status error'; if (error.message.includes('rezervat')) loadAvailability(); }
