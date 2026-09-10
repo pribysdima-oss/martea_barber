@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="ro">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Martea Admin · Programări</title>
+  <link rel="stylesheet" href="/admin/styles.css">
+</head>
+<body>
+  <main class="admin-shell">
+    <a class="brand" href="/">✂ Martea</a>
+    <section class="login-card" id="login-card">
+      <p class="eyebrow">ZONĂ PRIVATĂ</p>
+      <h1>Programări</h1>
+      <p>Introdu parola administratorului pentru a vedea datele clienților.</p>
+      <form id="login-form">
+        <label>Utilizator administrator<input id="username" type="text" autocomplete="username" required></label>
+        <label>Parolă administrator<input id="password" type="password" autocomplete="current-password" required></label>
+        <button type="submit">Deschide programările</button>
+        <p id="login-status" role="status"></p>
+      </form>
+    </section>
+    <section class="dashboard" id="dashboard" hidden>
+      <div class="dashboard-head"><div><p class="eyebrow">MARTEA ADMIN</p><h1>Programări primite</h1></div><button class="secondary" id="logout" type="button">Ieși</button></div>
+      <p id="summary"></p>
+      <div class="table-wrap"><table><thead><tr><th>Data</th><th>Ora</th><th>Client</th><th>Serviciu</th><th>Telefon</th><th>Email</th></tr></thead><tbody id="appointments"></tbody></table></div>
+      <p id="dashboard-status" role="status"></p>
+    </section>
+  </main>
+  <script src="/admin/admin.js"></script>
+</body>
+</html>
