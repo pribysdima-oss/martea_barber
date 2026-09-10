@@ -1,8 +1,7 @@
--- Run this file once against the PostgreSQL database from .env.
-CREATE EXTENSION IF NOT EXISTS pgcrypto;
-
+-- This is created automatically by the Vercel API on the first request.
+-- Run it manually only if you prefer to initialize PostgreSQL yourself.
 CREATE TABLE IF NOT EXISTS appointments (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  id BIGSERIAL PRIMARY KEY,
   appointment_date DATE NOT NULL,
   appointment_time TIME NOT NULL,
   service VARCHAR(80) NOT NULL,

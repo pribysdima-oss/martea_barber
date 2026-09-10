@@ -21,12 +21,16 @@ pnpm start
 
 ## PostgreSQL для production
 
-1. Создайте базу PostgreSQL.
-2. Выполните [`database/schema.sql`](database/schema.sql) в этой базе.
-3. Скопируйте `.env.example` в `.env` и добавьте строку `DATABASE_URL=postgres://...`.
-4. Перезапустите сервер.
+Для записи клиентов на Vercel нужна облачная PostgreSQL-база. SQLite работает только в локальном запуске.
 
-При заданном `DATABASE_URL` приложение автоматически использует PostgreSQL вместо SQLite.
+1. В Vercel откройте проект → **Storage** → **Browse Marketplace** → **Neon** → **Install**.
+2. Выберите проект `martea-barber`, создайте базу на бесплатном плане и подтвердите подключение.
+3. Neon автоматически добавит `DATABASE_URL` в переменные проекта Vercel.
+4. В Vercel откройте **Deployments** и выберите **Redeploy** у последнего деплоя.
+
+После первого обращения к календарю Vercel Function автоматически создаст таблицу `appointments` и уникальное ограничение, которое не позволяет двум клиентам забронировать один слот.
+
+Vercel автоматически разворачивает файлы в [`api/`](api): `availability`, `appointments`, `services` и `health`. Это отдельные serverless-функции, поэтому они работают на публичном сайте, а не только при `start.bat` на вашем компьютере.
 
 ## API
 
