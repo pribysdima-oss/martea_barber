@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ro">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#17283a">
+    <meta name="description" content="Martea Barber — tunsori cu atitudine și programări online.">
+    <title>Martea Barber | Programări online</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a href="#acasa" class="brand" aria-label="Martea Barber, acasă"><span class="brand-mark">✂</span><span data-i18n="brand.name">Martea</span></a>
+      <button class="menu-toggle" aria-label="Deschide meniul" aria-expanded="false">☰</button>
+      <nav class="main-nav" aria-label="Navigare principală">
+        <a class="active" href="#acasa" data-i18n="nav.home">Home</a>
+        <a href="#despre" data-i18n="nav.about">Despre mine</a>
+        <a href="#servicii" data-i18n="nav.prices">Prețuri</a>
+        <a href="#programari" data-i18n="nav.booking">Programări</a>
+        <a href="#contacte" data-i18n="nav.contact">Contacte</a>
+      </nav>
+      <div class="language-switch" aria-label="Limba paginii"><button class="selected" data-language="ro">RO</button><button data-language="ru">RU</button></div>
+    </header>
+
+    <main>
+      <section class="hero section" id="acasa">
+        <div class="hero-portrait" aria-hidden="true">
+          <svg viewBox="0 0 320 320" role="img"><defs><linearGradient id="face" x1="0" x2="1"><stop stop-color="#f6f7f8"/><stop offset="1" stop-color="#dce3e8"/></linearGradient></defs><circle cx="160" cy="160" r="154" fill="url(#face)"/><path fill="#182838" d="M98 316v-66c0-31 25-56 56-56h12c31 0 56 25 56 56v66z"/><path fill="#fff" d="M119 212h82l-12 104h-58z"/><path fill="#192a3a" d="M131 207l29 21 29-21 13 109h-84z"/><path fill="#f6f7f8" d="M117 125c0-42 21-71 43-71s43 29 43 71v40c0 34-20 59-43 59s-43-25-43-59z"/><path fill="#192a3a" d="M112 128c0-51 21-83 49-83 25 0 51 21 53 67-23-4-42-21-52-35-10 25-30 40-50 43z"/><path fill="#192a3a" d="M122 175c8 31 23 45 38 45s31-14 38-45c-9 8-20 11-38 11s-29-3-38-11z"/><path fill="#192a3a" d="M133 183c8 16 16 22 27 22s21-6 28-22c-10 3-17 4-28 4s-18-1-27-4z"/><circle cx="141" cy="142" r="4" fill="#192a3a"/><circle cx="180" cy="142" r="4" fill="#192a3a"/><path d="M146 166c8 4 19 4 28 0" stroke="#192a3a" stroke-width="4" fill="none" stroke-linecap="round"/><circle cx="84" cy="281" r="5" fill="#fff"/><circle cx="236" cy="281" r="5" fill="#fff"/></svg>
+        </div>
+        <div class="hero-copy" id="despre">
+          <p class="eyebrow" data-i18n="hero.eyebrow">BARBER SHOP · CHIȘINĂU</p>
+          <h1 data-i18n="brand.name">Martea</h1>
+          <h2 data-i18n="hero.title">Tunsori cu atitudine. Stilul tău, semnătura mea.</h2>
+          <p data-i18n="hero.text">Sunt Martea, barber pasionat de ceea ce fac. Îți ofer o experiență completă, cu atenție la detalii, precizie și un stil care te reprezintă.</p>
+          <a class="button" href="#programari" data-i18n="hero.cta">Programează-te</a>
+        </div>
+      </section>
+
+      <section class="soft-section section" aria-labelledby="reviews-title">
+        <div class="section-heading"><p class="eyebrow" data-i18n="reviews.eyebrow">CLIENȚII NOȘTRI</p><h2 id="reviews-title" data-i18n="reviews.title">Recenzii</h2></div>
+        <div class="review-grid">
+          <article class="review-card"><div class="stars">★★★★★</div><p data-i18n="reviews.first">„Cel mai bun barber! Martea știe exact ce ți se potrivește. Tunsori impecabile și atmosferă relaxantă.”</p><div class="reviewer"><span>●</span><div><strong>Andrei Popa</strong><small>12 aprilie 2025</small></div></div></article>
+          <article class="review-card"><div class="stars">★★★★★</div><p data-i18n="reviews.second">„Profesionalism, atenție la detalii și mereu o energie bună. Recomand cu încredere!”</p><div class="reviewer"><span>●</span><div><strong>Vlad Ionescu</strong><small>3 aprilie 2025</small></div></div></article>
+          <article class="review-card"><div class="stars">★★★★★</div><p data-i18n="reviews.third">„Am fost pentru prima dată și sigur voi reveni. Tunsorile sunt moderne, iar Martea este un adevărat profesionist!”</p><div class="reviewer"><span>●</span><div><strong>Radu Ștefan</strong><small>28 martie 2025</small></div></div></article>
+        </div>
+      </section>
+
+      <section class="section" id="servicii" aria-labelledby="services-title">
+        <div class="section-heading"><p class="eyebrow" data-i18n="services.eyebrow">ALEGE SERVICIUL</p><h2 id="services-title" data-i18n="services.title">Servicii</h2></div>
+        <div class="service-grid">
+          <article class="service-card"><div class="service-image classic" role="img" aria-label="Tuns clasic"></div><div class="service-body"><span class="service-icon">✂</span><div><h3 data-i18n="service.classic.title">Tuns clasic</h3><p data-i18n="service.classic.text">Tuns modern, adaptat stilului tău.</p></div></div><button class="price-button" data-service="Tuns clasic">200 lei</button></article>
+          <article class="service-card"><div class="service-image beard" role="img" aria-label="Aranjare barbă"></div><div class="service-body"><span class="service-icon">♛</span><div><h3 data-i18n="service.beard.title">Doar barbă</h3><p data-i18n="service.beard.text">Îngrijire și contur perfect pentru o barbă în look perfect.</p></div></div><button class="price-button" data-service="Doar barbă">150 lei</button></article>
+          <article class="service-card"><div class="service-image combo" role="img" aria-label="Tuns și barbă"></div><div class="service-body"><span class="service-icon">✂</span><div><h3 data-i18n="service.combo.title">Tuns + Barbă</h3><p data-i18n="service.combo.text">Completează-ți stilul cu o tunsoare și o barbă perfectă.</p></div></div><button class="price-button" data-service="Tuns + Barbă">400 lei</button></article>
+        </div>
+      </section>
+
+      <section class="booking-section section" id="programari" aria-labelledby="booking-title">
+        <div class="section-heading"><p class="eyebrow" data-i18n="booking.eyebrow">REZERVĂ ONLINE</p><h2 id="booking-title" data-i18n="booking.title">Contacte / Programări</h2></div>
+        <div class="booking-grid">
+          <aside class="contact-card" id="contacte"><div class="contact-row"><span>⌖</span><div><strong data-i18n="contact.address">Adresa</strong><a href="https://maps.google.com/?q=Strada+Libertății+12,+Chișinău" target="_blank" rel="noopener">Str. Libertății 12, Chișinău, Moldova</a></div></div><div class="contact-row"><span>☎</span><div><strong data-i18n="contact.phone">Telefon</strong><a href="tel:+37369123456">+373 69 123 456</a></div></div><div class="contact-row"><span>◔</span><div><strong>WhatsApp</strong><a href="https://wa.me/37369123456" target="_blank" rel="noopener">+373 69 123 456</a></div></div><iframe title="Harta locației Martea Barber" src="https://www.openstreetmap.org/export/embed.html?bbox=28.820%2C47.015%2C28.850%2C47.030&amp;layer=mapnik" loading="lazy"></iframe></aside>
+          <section class="calendar-card" aria-labelledby="calendar-title"><h3 id="calendar-title" data-i18n="calendar.title">Alege data și ora</h3><div class="calendar-controls"><button id="previous-month" aria-label="Luna precedentă">‹</button><strong id="month-label"></strong><button id="next-month" aria-label="Luna următoare">›</button></div><div class="weekdays"><span data-i18n="day.mon">Lu</span><span data-i18n="day.tue">Ma</span><span data-i18n="day.wed">Mi</span><span data-i18n="day.thu">Jo</span><span data-i18n="day.fri">Vi</span><span data-i18n="day.sat">Sâ</span><span data-i18n="day.sun">Du</span></div><div id="calendar-days" class="calendar-days"></div><p class="time-label" data-i18n="calendar.time">Ora disponibilă</p><div id="time-slots" class="time-slots" aria-live="polite"></div><p id="availability-message" class="availability-message"></p></section>
+          <section class="form-card"><h3 data-i18n="form.title">Completează datele tale</h3><form id="booking-form"><label><span data-i18n="form.service">Serviciu</span><select id="service" required><option value="" data-i18n="form.chooseService">Alege serviciul</option><option value="Tuns clasic" data-i18n="service.classic.title">Tuns clasic</option><option value="Doar barbă" data-i18n="service.beard.title">Doar barbă</option><option value="Tuns + Barbă" data-i18n="service.combo.title">Tuns + Barbă</option></select></label><div class="field-pair"><label><span data-i18n="form.firstName">Nume</span><input id="first-name" name="firstName" autocomplete="given-name" required minlength="2" placeholder="Nume" data-i18n-placeholder="form.firstName"></label><label><span data-i18n="form.lastName">Prenume</span><input id="last-name" name="lastName" autocomplete="family-name" required minlength="2" placeholder="Prenume" data-i18n-placeholder="form.lastName"></label></div><label><span data-i18n="form.phone">Telefon</span><input id="phone" name="phone" type="tel" autocomplete="tel" required placeholder="+373 69 123 456"></label><label><span>Email</span><input id="email" name="email" type="email" autocomplete="email" required placeholder="email@exemplu.md"></label><input id="selected-date" type="hidden"><input id="selected-time" type="hidden"><button class="submit-button" type="submit">▣ <span data-i18n="form.submit">Programează-te</span></button><p class="form-note" data-i18n="form.note">După trimitere, vei primi o confirmare pe email sau telefon.</p><p id="form-status" class="form-status" aria-live="polite"></p></form></section>
+        </div>
+      </section>
+    </main>
+
+    <footer><a href="#acasa" class="brand"><span class="brand-mark">✂</span><span data-i18n="brand.name">Martea</span></a><p data-i18n="footer">Tunsori cu atitudine. Stilul tău, semnătura mea.</p><div class="language-switch"><button class="selected" data-language="ro">RO</button><button data-language="ru">RU</button></div></footer>
+    <script src="app.js"></script>
+  </body>
+</html>
