@@ -7,6 +7,7 @@ const localPreview = location.protocol === 'file:' ||
   (['localhost', '127.0.0.1'].includes(location.hostname) && location.port !== '3000');
 const apiBase = document.body.dataset.apiUrl || (localPreview ? 'http://localhost:3000' : '');
 const api = (path) => `${apiBase}${path}`;
+const bookingEndpoint = document.body.dataset.bookingUrl || (localPreview ? api('/api/appointments') : '/booking');
 const offlineMessage = () => localPreview
   ? t('form.offlineLocal')
   : t('form.offlineHosted');
@@ -137,7 +138,7 @@ document.querySelector('#booking-form').addEventListener('submit', async (event)
   if (!canonicalServices.includes(payload.service)) { status.textContent = t('form.pickSlot'); status.className = 'form-status error'; return; }
   submit.disabled = true; status.textContent = t('form.sending'); status.className = 'form-status';
   try {
-    const response = await fetch(api('/api/appointments'), { method:'POST', headers:{ 'Content-Type':'application/json' }, body:JSON.stringify(payload) });
+    const response = await fetch(bookingEndpoint, { method:'POST', headers:{ 'Content-Type':'application/json' }, body:JSON.stringify(payload) });
     const data = await response.json();
     if (!response.ok) throw new Error(data.error || t('form.offline'));
     status.textContent = t('form.success').replace('{date}', state.selectedDate).replace('{time}', state.selectedTime);
