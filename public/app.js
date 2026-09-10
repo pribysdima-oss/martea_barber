@@ -7,6 +7,9 @@ const localPreview = location.protocol === 'file:' ||
   (['localhost', '127.0.0.1'].includes(location.hostname) && location.port !== '3000');
 const apiBase = document.body.dataset.apiUrl || (localPreview ? 'http://localhost:3000' : '');
 const api = (path) => `${apiBase}${path}`;
+const offlineMessage = () => localPreview
+  ? t('form.offlineLocal')
+  : t('form.offlineHosted');
 
 const texts = {
   ro: {
@@ -17,7 +20,7 @@ const texts = {
     'booking.eyebrow':'REZERVĂ ONLINE', 'booking.title':'Contacte / Programări', 'contact.address':'Adresa', 'contact.phone':'Telefon', 'calendar.title':'Alege data și ora', 'calendar.time':'Ora disponibilă',
     'day.mon':'Lu', 'day.tue':'Ma', 'day.wed':'Mi', 'day.thu':'Jo', 'day.fri':'Vi', 'day.sat':'Sâ', 'day.sun':'Du',
     'form.title':'Completează datele tale', 'form.service':'Serviciu', 'form.chooseService':'Alege serviciul', 'form.firstName':'Nume', 'form.lastName':'Prenume', 'form.phone':'Telefon', 'form.submit':'Programează-te', 'form.note':'După trimitere, vei primi o confirmare pe email sau telefon.',
-    'footer':'Tunsori cu atitudine. Stilul tău, semnătura mea.', 'availability.checking':'Se verifică disponibilitatea…', 'availability.booked':'Intervalele tăiate sunt deja rezervate.', 'availability.open':'Toate intervalele sunt disponibile.', 'availability.offline':'Serverul de programări nu răspunde. Pornește start.bat și deschide http://localhost:3000.', 'form.pickSlot':'Alege mai întâi data și ora dorită.', 'form.sending':'Se trimite programarea…', 'form.success':'Gata! Programarea pentru {date}, la {time}, a fost înregistrată.', 'form.offline':'Serverul de programări nu răspunde. Deschide site-ul prin start.bat, la http://localhost:3000.'
+    'footer':'Tunsori cu atitudine. Stilul tău, semnătura mea.', 'availability.checking':'Se verifică disponibilitatea…', 'availability.booked':'Intervalele tăiate sunt deja rezervate.', 'availability.open':'Toate intervalele sunt disponibile.', 'availability.offline':'Serviciul de programări nu răspunde momentan. Reîncarcă pagina și încearcă din nou.', 'form.pickSlot':'Alege mai întâi data și ora dorită.', 'form.sending':'Se trimite programarea…', 'form.success':'Gata! Programarea pentru {date}, la {time}, a fost înregistrată.', 'form.offlineLocal':'Serverul local nu răspunde. Pornește start.bat și deschide http://localhost:3000.', 'form.offlineHosted':'Serviciul de programări nu răspunde momentan. Reîncarcă pagina și încearcă din nou.'
   },
   ru: {
     'brand.name':'Martea', 'nav.home':'Главная', 'nav.about':'Обо мне', 'nav.prices':'Цены', 'nav.booking':'Запись', 'nav.contact':'Контакты',
@@ -27,7 +30,7 @@ const texts = {
     'booking.eyebrow':'ОНЛАЙН-ЗАПИСЬ', 'booking.title':'Контакты / Запись', 'contact.address':'Адрес', 'contact.phone':'Телефон', 'calendar.title':'Выберите дату и время', 'calendar.time':'Доступное время',
     'day.mon':'Пн', 'day.tue':'Вт', 'day.wed':'Ср', 'day.thu':'Чт', 'day.fri':'Пт', 'day.sat':'Сб', 'day.sun':'Вс',
     'form.title':'Заполните данные', 'form.service':'Услуга', 'form.chooseService':'Выберите услугу', 'form.firstName':'Имя', 'form.lastName':'Фамилия', 'form.phone':'Телефон', 'form.submit':'Записаться', 'form.note':'После отправки вы получите подтверждение по email или телефону.',
-    'footer':'Стрижки с характером. Твой стиль — моя подпись.', 'availability.checking':'Проверяем доступность…', 'availability.booked':'Зачёркнутые интервалы уже заняты.', 'availability.open':'Все интервалы доступны.', 'availability.offline':'Сервер записи не отвечает. Запустите start.bat и откройте http://localhost:3000.', 'form.pickSlot':'Сначала выберите дату и время.', 'form.sending':'Запись отправляется…', 'form.success':'Готово! Запись на {date}, {time} сохранена.', 'form.offline':'Сервер записи не отвечает. Запустите start.bat и откройте http://localhost:3000.'
+    'footer':'Стрижки с характером. Твой стиль — моя подпись.', 'availability.checking':'Проверяем доступность…', 'availability.booked':'Зачёркнутые интервалы уже заняты.', 'availability.open':'Все интервалы доступны.', 'availability.offline':'Сервис записи временно не отвечает. Обновите страницу и попробуйте снова.', 'form.pickSlot':'Сначала выберите дату и время.', 'form.sending':'Запись отправляется…', 'form.success':'Готово! Запись на {date}, {time} сохранена.', 'form.offlineLocal':'Локальный сервер не отвечает. Запустите start.bat и откройте http://localhost:3000.', 'form.offlineHosted':'Сервис записи временно не отвечает. Обновите страницу и попробуйте снова.'
   }
 };
 
@@ -36,7 +39,7 @@ const pad = (number) => String(number).padStart(2, '0');
 const isoDate = (date) => `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
 const today = () => { const date = new Date(); date.setHours(0, 0, 0, 0); return date; };
 const isBookable = (date) => date >= today() && date.getDay() !== 0;
-const friendlyError = (error) => error instanceof TypeError || /failed to fetch/i.test(error.message) ? t('form.offline') : error.message;
+const friendlyError = (error) => error instanceof TypeError || /failed to fetch/i.test(error.message) ? offlineMessage() : error.message;
 
 function renderCalendar() {
   const calendar = document.querySelector('#calendar-days');
